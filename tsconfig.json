@@ -1,23 +1,53 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    // Decides what features will be downleveled and which are left intact for JS features
+    // Next.js uses ESnext to get the very newest features for development
+    "target": "ESnext",
+    //Decides the type of definitions for built-in JS APIs as well as type definitions found in browser environments(Definition of doucument or Map in the project)
     "lib": ["dom", "dom.iterable", "esnext"],
+    // Allows JavaScript files to be imported inside the project
+    // Useful if needing to use Library that have JavaScript code or git repos only using JS
     "allowJs": true,
-    "skipLibCheck": true,
+    // If this is on it will ignore errors in every librarym and if it's on it will check every library for errors
+    // If the a library has a copy of a type in another library, it will not compile and can not be changed causing compiling errors
+    // Takes longer to compile if used, change to true if compiler errors show up inside a library
+    "skipLibCheck": false,
+    // strict enables a wide rage of checking behavior
+    // alwaysStrict ensures files are parsed in strict mode and emit use strict for each source file
     "strict": true,
+    "alwaysStrict": true,
+    // Next.js uses SWC(Speedy Web Compiler) to compile JavaScript so that Typescript does not do this
+    // SWC is faster compiler, it causes less isues like ghost files(.js files) right next to .ts files
     "noEmit": true,
+    // Allows the import of CommonJs modules in compliance with es6 modules specificication
     "esModuleInterop": true,
+    // Provides the projects compiler information to reduce runtime errors in the runtime environment
     "module": "esnext",
+    // Handles how typescript locates and loads the files your code imports
+    // It's less strict about pathing for imports and is compaatible with modern tools
     "moduleResolution": "bundler",
+    // Insurance that comments won't be removed when transpiled into javaScript code
+    "removeComments": false,
+    // Catches mistakes with inconsistent casing in file names
+    "forceConsistentCasingInFileNames": true,
+    // Allows importing modules with a .json extension
     "resolveJsonModule": true,
+    // Ensures each file can be safely transpiled by Next.js (SWC)
+    // Improves build speed by allowing file-by-file processing
+    // Prevents runtime errors with enums and type-only exports
     "isolatedModules": true,
+    // 'react-jsx' means I don't need 'import React' in every file
+    // It automatically turns my <tags> into _jsx() function calls so the browser can understand them
     "jsx": "react-jsx",
+    // Creates a snapshot of each build so it does not need to type check the entire project and only when you last ran it
     "incremental": true,
+    // Allows plugins from next.js to enchance development with next.js features
     "plugins": [
       {
         "name": "next"
       }
     ],
+    // Create shortcuts for imports, allows me to type shorter /paths
     "paths": {
       "@/*": ["./*"]
     }
